@@ -169,15 +169,25 @@ public class LibrarySearch {
      */
     public ListPOI<Term> termsRepeated(int n) {  
         /* TO BE COMPLETED */
-        return /* CHANGE THIS */ null;
-	}
+        ListPOI<Term> res = new LinkedListPOI<Term>();
+        ListPOI<Term> keys = index.keys();
+        
+        keys.begin(); 
+        while(!keys.isEnd()){
+            if(index.get(keys.get()).size() == n) {
+                res.add(keys.get());
+            }
+            keys.next(); 
+        }
+        return res;
+        //done
+    }
 
     /** Returns a ListPOI with the terms of the Digital Library's Index that
      *  appear only once in its books, i.e., the so-called "hapax legomena"
      *  of the Digital Library, or null if none exist.
      */
     public ListPOI<Term> hapax() {
-        /* TO BE COMPLETED */
-        return /* CHANGE THIS */ null;
+        return termsRepeated(1);
     }
 }    
