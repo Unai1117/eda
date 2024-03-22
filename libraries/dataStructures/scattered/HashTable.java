@@ -28,7 +28,7 @@ public class HashTable<K, V> implements Map<K, V> {
     // A JAVA CONSTANT that represents...
     /** The (boolean) value that indicates whether a Hash Table
      *  performs REHASHING when its load factor exceeds LF_STANDARD */
-    public static final boolean REHASHING = false;  // in Part 2 it must be true;
+    public static final boolean REHASHING = true;  // in Part 2 it must be true;
 
     // AN array of ListPOIs whose elements are HashEntry<K,V>:
     // - theArray[h] represents a bucket, or list of
@@ -222,6 +222,22 @@ public class HashTable<K, V> implements Map<K, V> {
     @SuppressWarnings("unchecked")
     protected final void rehashing() {
         /* TO BE COMPLETED */
+        int newSize = nextPrime(theArray.length * 2); 
+        
+        ListPOI<HashEntry <K,V>>[] res = new LinkedListPOI[newSize]; 
+        
+        for(int i = 0; i < res.length; i++){
+            res[i] = new LinkedListPOI<HashEntry<K,V>>();
+        }
+        ListPOI<HashEntry <K,V>>[] aux = theArray; 
+        theArray = res;
+        
+        for(int i = 0; i < aux.length; i++){
+            ListPOI<HashEntry <K,V>> index = aux[i];
+            for(index.begin(); !index.isEnd(); index.next()){
+                theArray[hashIndex(index.get().key)].add(new HashEntry<K,V>(index.get().key, index.get().value));
+            }
+        }
         return; 
     }
 
