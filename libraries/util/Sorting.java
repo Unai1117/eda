@@ -157,6 +157,7 @@ public class Sorting {
      * @param f Upper bound of the interval to be sorted
      * @return T[], the array that results from sorting v[i, f]
      */
+    @SuppressWarnings("unchecked")
     private static <T extends Comparable<T>> T[] mergeSort2(T[] v, int i, int f) {
         if (i < f) {
             int mid = (i + f) / 2;
