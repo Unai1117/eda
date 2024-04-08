@@ -199,11 +199,12 @@ public class Sorting {
                 aux[k++] = v2[r++];
             }
         }
-        while (l < v1.length)
+        while (l < v1.length){
             aux[k++] = v1[l++];
-        while (r < v2.length)
+        }
+        while (r < v2.length){
             aux[k++] = v2[r++];
-
+        }
         return aux;
     }
 
