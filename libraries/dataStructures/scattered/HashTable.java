@@ -9,11 +9,11 @@ import libraries.dataStructures.linear.LinkedListPOI;
  * whose buckets, or collision lists, are represented
  * through Lists with POI of HashEntry<K,V>.
  * 
- * @param <K> the keys' type in the Map
- * @param <V> the values' type in the Map
+ * @param <K>  the keys' type in the Map
+ * @param <V>  the values' type in the Map
  * 
- * @author (EDA-QA)
- * @version (Curso 2020-2021)
+ * @author (EDA-QA) 
+ * @version (Curso 2023-2024)
  */
 
 public class HashTable<K, V> implements Map<K, V> {
@@ -21,24 +21,22 @@ public class HashTable<K, V> implements Map<K, V> {
     // A Hash Table HAS:
 
     // A JAVA CONSTANT that represents...
-    /**
-     * The default value (float) of the standard load factor (by default)
-     * of a Hash Table (the same as the one used in java.util.HashMap)
-     */
+    /** The default value (float) of the standard load factor (by default)
+     *  of a Hash Table (the same as the one used in java.util.HashMap) */
     public static final double LF_STANDARD = 0.75;
 
     // A JAVA CONSTANT that represents...
-    /**
-     * The (boolean) value that indicates whether a Hash Table
-     * performs REHASHING when its load factor exceeds LF_STANDARD
-     */
-    public static final boolean REHASHING = true; // in Part 2 it must be true;
+    /** The (boolean) value that indicates whether a Hash Table
+     *  performs REHASHING when its load factor exceeds LF_STANDARD */
+    private static boolean REHASHING = true;  // in Part 1 it was false;
+
+    public static void setRehashing(boolean b) { REHASHING = b; }
 
     // AN array of ListPOIs whose elements are HashEntry<K,V>:
     // - theArray[h] represents a bucket, or list of
-    // collissions associated to the Hash index h
+    //   collissions associated to the Hash index h
     // - theArray[h] contains the reference to the ListPOI
-    // that contains all Entries whose Key has Hash index h.
+    //   that contains all Entries whose Key has Hash index h.
     protected ListPOI<HashEntry<K, V>>[] theArray;
 
     // A size that represents the number of Entries
@@ -60,16 +58,12 @@ public class HashTable<K, V> implements Map<K, V> {
      */
     protected int hashIndex(K k) {
         int hashIndex = k.hashCode() % this.theArray.length;
-        if (hashIndex < 0) {
-            hashIndex += this.theArray.length;
-        }
+        if (hashIndex < 0) { hashIndex += this.theArray.length; }
         return hashIndex;
     }
 
-    /**
-     * Creates an empty HashTable, with estimatedMaxSize
-     * entries and load factor 0.75
-     */
+    /** Creates an empty HashTable, with estimatedMaxSize
+     *  entries and load factor 0.75 */
     @SuppressWarnings("unchecked")
     public HashTable(int estimatedMaxSize) {
         int capacity = (int) (estimatedMaxSize / LF_STANDARD);
@@ -84,16 +78,11 @@ public class HashTable<K, V> implements Map<K, V> {
 
     /**
      * Returns a prime number GREATER or EQUAL to n,
-     * i.e. the first prime after n.
-     */
+     * i.e. the first prime after n. */
     public static int nextPrime(int n) {
         int aux = n;
-        if (aux % 2 == 0) {
-            aux++;
-        }
-        for (; !isPrime(aux); aux += 2) {
-            ;
-        }
+        if (aux % 2 == 0) { aux++; }
+        for (; !isPrime(aux); aux += 2) { ; }
         return aux;
     }
 
@@ -106,35 +95,23 @@ public class HashTable<K, V> implements Map<K, V> {
         return true; // n IS prime
     }
 
-    /**
-     * Returns the (real) load factor of a Hash Table,
-     * which is equivalent to the average length of its
-     * buckets in a Linked implementation of the Table
-     */
+    /** Returns the (real) load factor of a Hash Table,
+     *  which is equivalent to the average length of its
+     *  buckets in a Linked implementation of the Table */
     public final double loadFactor() {
         return (double) size / theArray.length;
     }
 
-    /**
-     * Checks whether a Hash Table is empty,
-     * i.e. if it has 0 Entries
-     */
-    public boolean isEmpty() {
-        return size == 0;
-    }
+    /** Checks whether a Hash Table is empty,
+     *  i.e. if it has 0 Entries */
+    public boolean isEmpty() { return size == 0; }
 
     /** Returns the size, or number of Entries of a Hash Table. */
-    public int size() {
-        return size;
-    }
+    public int size() { return size; }
 
-    /**
-     * Returns the number of Rehashing operations that
-     * have been performed during the Hash Table operation
-     */
-    public int numberOfRehashings() {
-        return rhCount;
-    }
+    /** Returns the number of Rehashing operations that
+     *  have been performed during the Hash Table operation */
+    public int numberOfRehashings() { return rhCount; }
 
     /** Returns a ListPOI with the size() keys of a Hash Table */
     public ListPOI<K> keys() {
@@ -149,10 +126,8 @@ public class HashTable<K, V> implements Map<K, V> {
         return res;
     }
 
-    /**
-     * Returns a String with the Entries of a Hash Table
-     * in a given text format (see HashEntry#toString())
-     */
+    /** Returns a String with the Entries of a Hash Table
+     *  in a given text format (see HashEntry#toString()) */
     // REMEMBER: use StringBuilder to be efficient
     public final String toString() {
         StringBuilder res = new StringBuilder();
@@ -164,10 +139,8 @@ public class HashTable<K, V> implements Map<K, V> {
         return res.toString();
     }
 
-    /**
-     * Returns the value of the Entry with Key k of a
-     * Hash Table, or null if no such entry exists in the Table
-     */
+    /** Returns the value of the Entry with Key k of a
+     *  Hash Table, or null if no such entry exists in the Table */
     public V get(K k) {
         int pos = hashIndex(k);
         ListPOI<HashEntry<K, V>> l = theArray[pos];
@@ -179,17 +152,13 @@ public class HashTable<K, V> implements Map<K, V> {
         }
         // Wrapping up the Search: IFF it is found,
         // we obtain the value of that Entry
-        if (!l.isEnd()) {
-            value = l.get().value;
-        }
+        if (!l.isEnd()) { value = l.get().value; }
         return value;
     }
 
-    /**
-     * Removes the Entry with Key k from a Hash Table and
-     * returns its associated value, or null if that entry
-     * does not appear in the Table
-     */
+    /** Removes the Entry with Key k from a Hash Table and
+     *  returns its associated value, or null if that entry
+     *  does not appear in the Table */
     public V remove(K k) {
         int pos = hashIndex(k);
         ListPOI<HashEntry<K, V>> l = theArray[pos];
@@ -209,18 +178,17 @@ public class HashTable<K, V> implements Map<K, V> {
         return value;
     }
 
-    /**
-     * Inserts the Entry(k, v) in a Hash Table and
-     * returns the old value associated to k, or null
-     * if no old entry existed in the Table
-     */
+    /** Inserts the Entry(k, v) in a Hash Table and
+     *  returns the old value associated to k, or null
+     *  if no old entry existed in the Table */
     // Invokes method rehashing() IFF
     // - The constant REHASHING's value is true
     // AND
     // - AFTER inserting a new Entry in its corresponding
-    // bucket and incrementing the size of the Table,
-    // loadFactor() > LF_STANDARD
+    //   bucket and incrementing the size of the Table,
+    //   loadFactor() > LF_STANDARD
     public V put(K k, V v) {
+        int pos = hashIndex(k);
         ListPOI<HashEntry<K, V>> l = theArray[hashIndex(k)];
         V oldValue = null;
         // Searching for the Entry with Key k in bucket l
@@ -237,12 +205,13 @@ public class HashTable<K, V> implements Map<K, V> {
             // Effective insertion of the Entry (k, v)
             l.add(new HashEntry<K, V>(k, v));
             size++;
-
+            
             if (loadFactor() > LF_STANDARD && REHASHING) {
                 rhCount++;
-                rehashing();
+                rehashing(); 
             }
-        } else {
+        }
+        else {
             // Obtain the current value of the Entry with
             // Key k, to return it, and update it to the new value v
             oldValue = l.get().value;
@@ -251,10 +220,8 @@ public class HashTable<K, V> implements Map<K, V> {
         return oldValue;
     }
 
-    /**
-     * Method that implements Rehashing. For obvious reasons,
-     * rhCount MUSTN'T be re-initialized.
-     */
+    /** Method that implements Rehashing. For obvious reasons,
+     *  rhCount MUSTN'T be re-initialized. */
     @SuppressWarnings("unchecked")
     protected final void rehashing() {
         /* TO BE COMPLETED */
@@ -314,42 +281,29 @@ public class HashTable<K, V> implements Map<K, V> {
         // done
     }
 
-    /**
-     * Returns a String with the occupation histogram
-     * of a Linked Hash Table in textual format. Thus,
-     * each of its two lines show two integer values
-     * separated by a tab: the bucket length (int in [0, 9])
-     * and the number of buckets with that length.
-     * ATTENTION: the number of buckets in each line i IS:
-     * (a) 0 <= i <= 8: the number of buckets in the Table
-     * with exactly i elements (size == i)
-     * (b) i == 9 (last line): the number of buckets in the
-     * Table that contain 9 or more elements.
+
+    /** Returns a String with the occupation histogram
+     *  of a Linked Hash Table in textual format. Thus,
+     *  each of its two lines show two integer values
+     *  separated by a tab: the bucket length (int in [0, 9])
+     *  and the number of buckets with that length.
+     *  ATTENTION: the number of buckets in each line i IS:
+     *  (a) 0 <= i <= 8: the number of buckets in the Table
+     *      with exactly i elements (size == i)
+     *  (b) i == 9 (last line): the number of buckets in the
+     *      Table that contain 9 or more elements.
      */
     public String histogram() {
         int[] histo = new int[10];
         for (int i = 0; i < theArray.length; i++) {
-            int bucketLength = theArray[i].size(); // CAREFUL! NOT a traversal!
-            if (bucketLength < 9) {
-                histo[bucketLength]++;
-            } else {
-                histo[9]++;
-            }
+            int bucketLength = theArray[i].size(); //CAREFUL! NOT a traversal!
+            if (bucketLength < 9) { histo[bucketLength]++; }
+            else { histo[9]++; }
         }
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < histo.length; i++) {
             res.append(i).append('\t').append(histo[i]).append('\n');
         }
         return res.toString();
-    }
-
-    public Map<K, Integer> locateCostMap() {
-        Map<K, Integer> map = new HashTable<>(size);
-        for (ListPOI<HashEntry<K, V>> list : theArray) {
-            int i = 1;
-            for (list.begin(); !list.isEnd(); list.next())
-                map.put(list.get().key, i++);
-        }
-        return map;
     }
 }
