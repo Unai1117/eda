@@ -198,4 +198,34 @@ public class LibrarySearch {
     public ListPOI<Term> hapax() {
         return termsRepeated(1);
     }
+    
+    private static Term leastFrequent(Map<Term, Integer> m) {
+        ListPOI<Term> lt = m.keys();
+        Term tMin = null;
+        for (lt.begin(); !lt.isEnd(); lt.next()) {
+            Term t = lt.get();
+            if (tMin == null || m.get(tMin) > m.get(t))
+                tMin = t;
+        }
+        return tMin;
+    }
+    
+    public Map<Term, Integer> mostFrequentTerms(int n) {
+        Map<Term, Integer> res = new HashTable<Term, Integer>(n);
+        ListPOI<Term> keys = index.keys();
+        for (keys.begin(); !keys.isEnd(); keys.next()) {
+            Term key = keys.get();
+            if (res.size() < n) {
+                res.put(key, index.get(key).size());
+            } else {
+                Term leastFrequent = leastFrequent(res);
+                if (index.get(key).size() > res.get(leastFrequent)) {
+                    res.remove(leastFrequent);
+                    res.put(key, index.get(key).size());
+                }
+            }
+        }
+        return res;
+    }
+    
 }
