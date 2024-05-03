@@ -7,7 +7,7 @@ import applications.census.Resident;
  * @author  EDA Professors
  * @version April 2024
  */
-public class Patient {
+public class Patient implements Comparable<Patient>{
 
     private final Resident id;
 
@@ -82,6 +82,13 @@ public class Patient {
     @Override
     public int compareTo(Patient other) {
         // TO BE COMPLETED
+        if(this.getGravity() < other.getGravity()){
+            return -1; 
+        } else if(this.getGravity() > other.getGravity()){
+            return 1; 
+        } else {
+            return 0; 
+        }
     }
 
     /** Returns a string representation for this Patient. */

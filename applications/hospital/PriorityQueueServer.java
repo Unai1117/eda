@@ -20,24 +20,29 @@ public class PriorityQueueServer implements SurgeryServer {
     /** Creates an empty SurgeryServer. */
     public PriorityQueueServer() {
         /* TO BE COMPLETED */
+        pQ = new BinaryHeap<Patient>();
+        //done
     }
 
     /** Includes a new Patient p in a SurgeryServer. */
     @Override
     public void addWaiting(Patient j) {
         /* TO BE COMPLETED */
+        pQ.add(j); 
     }
 
     /** Checks whether there is any Patient waiting for surgery. */
     @Override
     public boolean hasPatients() {
         /* TO BE COMPLETED */
+        return !pQ.isEmpty(); 
     }
 
     /** IFF hasPatients(): returns the Patient from a SurgeryServer to be operated. */
     @Override
     public Patient getPatient() {
         /* TO BE COMPLETED */
+        return pQ.getMin(); 
     }
 
     /**
@@ -49,5 +54,8 @@ public class PriorityQueueServer implements SurgeryServer {
     @Override
     public Patient operatePatient(int h) {
         /* TO BE COMPLETED */
+        Patient p = pQ.removeMin(); 
+        p.setEntersSurgery(h + SURGERY_TIME); 
+        return p; 
     }
 }

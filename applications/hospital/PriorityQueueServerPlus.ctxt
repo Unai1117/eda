@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=PriorityQueueServerPlus
+comment0.text=\n\ Write\ a\ description\ of\ class\ PriorityQueueServerPlus\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=int\ numPatients()
+comment2.params=
+comment2.target=Patient\ transferPatient()
+comment3.params=s
+comment3.target=void\ distributePatients(SurgeryServerPlus)
+comment4.params=p
+comment4.target=void\ addWaiting(Patient)
+comment5.params=h
+comment5.target=Patient\ operatePatient(int)
+numComments=6
