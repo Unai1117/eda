@@ -6,7 +6,7 @@ package libraries.dataStructures.graphs;
  * @version november 2021
  */
 
-public class Edge {
+public class Edge implements Comparable<Edge>{
 
     // AN Edge HAS A source vertex AND A target vertex:
     /* TO BE COMPLETED */
@@ -68,5 +68,14 @@ public class Edge {
     public String toString() {
         // CHANGE ME
         return "(" + this.source + ", " + this.target + ", " + this.weight + ")";
+    }
+    
+    public int compareTo(Edge o){
+        double w1 = this.getWeight(), w2 = o.getWeight(); 
+        if(w1 == w2) return 0; 
+        if(w1 > w2) return 1; 
+        else {
+            return -1; 
+        }
     }
 }
