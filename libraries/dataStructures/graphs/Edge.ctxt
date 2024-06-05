@@ -1,21 +1,21 @@
 #BlueJ class context
 comment0.target=Edge
-comment0.text=\n\ Edge\ Class\:\ represents\ an\ edge\ in\ a\ graph.<br>\n\n\ @version\ november\ 2021\n
+comment0.text=\r\n\ Edge\ Class\:\ represents\ an\ edge\ in\ a\ graph.<br>\r\n\r\n\ @version\ november\ 2021\r\n
 comment1.params=a\ b\ w
 comment1.target=Edge(int,\ int,\ double)
-comment1.text=\n\ Creates\ an\ edge\ (a,\ b)\ with\ weight\ w.\n\n\ @param\ a\ Source\ vertex\n\ @param\ b\ Target\ vertex\n\ @param\ w\ Weight\n
+comment1.text=\r\n\ Creates\ an\ edge\ (a,\ b)\ with\ weight\ w.\r\n\r\n\ @param\ a\ Source\ vertex\r\n\ @param\ b\ Target\ vertex\r\n\ @param\ w\ Weight\r\n
 comment2.params=
 comment2.target=int\ getSource()
-comment2.text=\n\ Returns\ the\ source\ vertex\ of\ an\ edge.\n\n\ @return\ int\ source\ vertex\n
+comment2.text=\r\n\ Returns\ the\ source\ vertex\ of\ an\ edge.\r\n\r\n\ @return\ int\ source\ vertex\r\n
 comment3.params=
 comment3.target=int\ getTarget()
-comment3.text=\n\ Returns\ the\ target\ vertex\ of\ an\ edge.\n\n\ @return\ int\ target\ vertex\n
+comment3.text=\r\n\ Returns\ the\ target\ vertex\ of\ an\ edge.\r\n\r\n\ @return\ int\ target\ vertex\r\n
 comment4.params=
 comment4.target=double\ getWeight()
-comment4.text=\n\ Reterns\ an\ edge's\ weight\n\n\ @return\ double\ Weight\ of\ the\ edge\n
+comment4.text=\r\n\ Reterns\ an\ edge's\ weight\r\n\r\n\ @return\ double\ Weight\ of\ the\ edge\r\n
 comment5.params=
 comment5.target=java.lang.String\ toString()
-comment5.text=\n\ Returns\ a\ String\ that\ represents\ an\ edge\n\ in\ the\ format\ (source,\ target,\ weight)\n\n\ @return\ String\ that\ represents\ the\ edge\n
+comment5.text=\r\n\ Returns\ a\ String\ that\ represents\ an\ edge\r\n\ in\ the\ format\ (source,\ target,\ weight)\r\n\r\n\ @return\ String\ that\ represents\ the\ edge\r\n
 comment6.params=o
 comment6.target=int\ compareTo(Edge)
 numComments=7
