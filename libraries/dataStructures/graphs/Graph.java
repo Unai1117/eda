@@ -3,7 +3,6 @@ package libraries.dataStructures.graphs;
 import libraries.dataStructures.models.Queue;
 import libraries.dataStructures.models.ListPOI;
 
-
 import libraries.dataStructures.hierarchical.BinaryHeap;
 import libraries.dataStructures.linear.ArrayQueue;
 
@@ -231,26 +230,26 @@ public abstract class Graph {
         Edge[] res = new Edge[numVertices() - 1];
         int pos = 0;
         PriorityQueue<Edge> pq = new BinaryHeap<Edge>();
-        UFSet uf = new ForestUFSet(numVertices()); 
-        
-        for(int i = 0; i < numVertices(); ++i){
+        UFSet uf = new ForestUFSet(numVertices());
+
+        for (int i = 0; i < numVertices(); ++i) {
             ListPOI<Adjacent> aux = adjacentTo(i);
-            for(aux.begin(); !aux.isEnd(); aux.next()){
-                pq.add(new Edge(i, aux.get().target, edgeWeight(i, aux.get().target))); 
+            for (aux.begin(); !aux.isEnd(); aux.next()) {
+                pq.add(new Edge(i, aux.get().target, edgeWeight(i, aux.get().target)));
             }
         }
-        
-        while(pos < numVertices() - 1 && !pq.isEmpty()){
-            Edge auxEdge = pq.removeMin(); 
-            int ufV = uf.find(auxEdge.getSource()), ufW = uf.find(auxEdge.getTarget()); 
-            if(ufV != ufW){
-                uf.union(ufV, ufW); 
-                res[pos++] = auxEdge; 
+
+        while (pos < numVertices() - 1 && !pq.isEmpty()) {
+            Edge auxEdge = pq.removeMin();
+            int ufV = uf.find(auxEdge.getSource()), ufW = uf.find(auxEdge.getTarget());
+            if (ufV != ufW) {
+                uf.union(ufV, ufW);
+                res[pos++] = auxEdge;
             }
         }
-        
-        if(pos == numVertices() - 1){
-            return res; 
+
+        if (pos == numVertices() - 1) {
+            return res;
         }
         return null;
     }
