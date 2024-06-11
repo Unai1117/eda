@@ -120,13 +120,13 @@ public class UndirectedGraph extends DirectedGraph {
             cont[mst[i].target]++;
         }
         int max = 0;
-        int res = 0;
+        int vertice = 0;
         for (int i = 0; i < numVertices(); i++) {
             if (cont[i] > max) {
                 max = cont[i];
-                res = i;
+                vertice = i;
             }
         }
-        return res;
+        return vertice;
     }
 }
